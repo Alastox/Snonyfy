@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snonyfy</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Sidebar izquierdo -->
+    <aside class="sidebar">
+        <h1>Snonyfy</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Buscar</a></li>
+                <li><a href="#">Tu Biblioteca</a></li>
+            </ul>
+        </nav>
+        <div class="playlists">
+            <h3>Playlists</h3>
+            <ul>
+                <li>Canciones favoritas</li>
+                <li>Para estudiar</li>
+                <li>Workout</li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Área principal -->
+    <main class="main-content">
+        <header>
+            <input type="text" placeholder="Buscar canciones, artistas...">
+            <img src="https://via.placeholder.com/50" alt="Perfil" class="profile-img">
+        </header>
+
+        <!-- Contenido principal -->
+        <section class="now-playing">
+            <div class="album-art">
+                <img src="media/d4vd-feel-it.webp" alt="Album Art">
+                <div class="song-info">
+                    <h2>Feel It</h2>
+                    <p>D4vd</p>
+                </div>
+            </div>
+        </section>
+        
+
+        <!-- Controles de reproducción -->
+        <section class="controls">
+            <audio id="audio-player" src="media/d4vd - Feel It (Animated Lyric Video).mp3"></audio>
+            <button class="prev-btn"><img src="icons/backward-solid.svg" alt="prev-btn" width="30px"></button>
+            <button class="play-btn" onclick="playPause()"><img src="icons/play-fill.svg" alt="play-pause-btn" width="50px" height="40px"></button>
+            <button class="next-btn"><img src="icons/fast-forward-fill.svg" alt="next-btn" width="30px" height="50px"></button>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="player-footer">
+        <div class="song-details">
+            <p>Feel it - D4vd</p>
+        </div>
+        <div class="progress-bar">
+            <span id="current-time">0:00</span>
+            <div class="progress">
+                <div class="progress-fill"></div>
+            </div>
+            <span id="total-time">0:00</span>
+        </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+<script>
+    const audioPlayer = document.getElementById('audio-player');
+    const progressBar = document.querySelector('.progress-fill');
+    const currentTimeElement = document.getElementById('current-time');
+    const totalTimeElement = document.getElementById('total-time');
+    const playBtn = document.querySelector('.play-btn img');
+    let isPlaying = false;
+
+    // Función para cargar los detalles de la canción seleccionada
+    function loadSelectedSong() {
+            const selectedSong = JSON.parse(localStorage.getItem('selectedSong'));
+
+            if (selectedSong) {
+                document.getElementById('song-name').textContent = selectedSong.name;
+                document.getElementById('song-artist').textContent = selectedSong.artist;
+                document.getElementById('album-img').src = selectedSong.albumArt;
+                document.getElementById('audio-player').src = selectedSong.audioSrc;
+            }
+        }
+
+        // Llamar a la función cuando la página cargue
+        window.onload = loadSelectedSong;
+  
+    // Función para reproducir o pausar la canción
+    function playPause() {
+      if (isPlaying) {
+        audioPlayer.pause();
+        playBtn.src = 'icons/play-fill.svg'; // Cambiar el ícono a "play"
+      } else {
+        audioPlayer.play();
+        playBtn.src = 'icons/pause-solid.svg'; // Cambiar el ícono a "pause"
+      }
+      isPlaying = !isPlaying;
+    }
+  
+    // Formato para los segundos a minutos y segundos (mm:ss)
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+  
+    // Función para actualizar la barra de progreso y el tiempo actual
+    function updateProgressBar() {
+      const { duration, currentTime } = audioPlayer;
+  
+      // Actualizar la barra de progreso
+      const progressPercent = (currentTime / duration) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+  
+      // Actualizar el tiempo actual
+      currentTimeElement.textContent = formatTime(currentTime);
+    }
+  
+    // Mostrar la duración total de la canción una vez que los metadatos están cargados
+    audioPlayer.addEventListener('loadedmetadata', () => {
+      totalTimeElement.textContent = formatTime(audioPlayer.duration);
+    });
+  
+    // Actualizar la barra y el tiempo mientras la canción se reproduce
+    audioPlayer.addEventListener('timeupdate', updateProgressBar);
+  
+    // Resetear la barra de progreso y los tiempos cuando la canción termine
+    audioPlayer.addEventListener('ended', () => {
+      progressBar.style.width = '0%';
+      currentTimeElement.textContent = '0:00';
+      playBtn.src = 'icons/play-fill.svg';
+      isPlaying = false;
+    });
+  </script>
+  
+  

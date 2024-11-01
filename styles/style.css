@@ -1,0 +1,183 @@
+/* Estilos generales */
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #121212;
+  color: #fff;
+  display: flex;
+}
+
+h1, h2, p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #181818;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.sidebar h1 {
+  color: violet;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  margin-bottom: 20px;
+}
+
+.sidebar nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.sidebar .playlists {
+  margin-top: 50px;
+}
+
+.sidebar .playlists ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar .playlists ul li {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+header input {
+  width: 300px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  background-color: #333;
+  color: #fff;
+}
+
+.profile-img {
+  border-radius: 50%;
+  width: 50px;
+}
+
+/* Now Playing Section */
+.now-playing {
+  display: flex;
+  justify-content: center;
+}
+
+.album-art {
+  position: relative;
+}
+
+.album-art img {
+  width: 300px;
+  height: 300px;
+  border-radius: 15px;
+}
+
+.song-info {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.song-info h2 {
+  font-size: 24px;
+  color: violet;
+}
+
+.song-info p {
+  font-size: 18px;
+  color: #bbb;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+button {
+  background-color: #333;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 50px;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 35px;
+}
+
+button:hover {
+  background-color: violet;
+}
+
+/* Footer Player */
+.player-footer {
+  background-color: #181818;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+}
+
+.player-footer .song-details {
+  font-size: 16px;
+}
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  width: 60%;
+}
+
+.progress-bar span {
+  margin: 0 10px;
+}
+
+.progress {
+  width: 100%;
+  background-color: #333;
+  height: 8px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.progress-fill {
+  background-color: violet;
+  width: 0; /* Inicialmente en 0% */
+  height: 100%;
+  border-radius: 4px;
+}
+

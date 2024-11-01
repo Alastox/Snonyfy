@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snonyfy - Canciones</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Sidebar izquierdo -->
+    <aside class="sidebar">
+        <h1>Snonyfy</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#">Buscar</a></li>
+                <li><a href="#">Tu Biblioteca</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Área principal -->
+    <main class="main-content">
+        <h2>Todas las canciones</h2>
+        <ul class="song-list">
+            <li><a href="#" onclick="selectSong('Canción 1', 'Artista 1', 'https://via.placeholder.com/300', 'ruta-de-la-cancion1.mp3')">Canción 1 - Artista 1</a></li>
+            <li><a href="#" onclick="selectSong('Canción 2', 'Artista 2', 'https://via.placeholder.com/300', 'ruta-de-la-cancion2.mp3')">Canción 2 - Artista 2</a></li>
+            <li><a href="#" onclick="selectSong('Canción 3', 'Artista 3', 'https://via.placeholder.com/300', 'ruta-de-la-cancion3.mp3')">Canción 3 - Artista 3</a></li>
+        </ul>
+    </main>
+
+    <!-- Script para seleccionar la canción -->
+    <script>
+        function selectSong(songName, artist, albumArt, audioSrc) {
+            // Guardar los datos de la canción seleccionada en localStorage
+            localStorage.setItem('selectedSong', JSON.stringify({
+                name: songName,
+                artist: artist,
+                albumArt: albumArt,
+                audioSrc: audioSrc
+            }));
+
+            // Redirigir a la página principal
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
